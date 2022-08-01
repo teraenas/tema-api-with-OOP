@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600&display=swap');
+
+:root {
+  --clr-app-background: #ffffff;
+  --clr-header: #ffffff;
+  --clr-footer: #ffffff;
+  --clr-primary-background: #eeeeee;
+  --clr-secondary-background: #ffffff;
+  --clr-primary-element: #0075f2;
+  --clr-accent-positive: #4ecdc4;
+  --clr-accent-negative: #fc440f;
+
+  --clr-logo: #0075f2;
+
+  --clr-border-light: #e7e7e7;
+
+  --clr-text-light: #ffffff;
+  --clr-text-dark: #171717;
+  --clr-text-neutral-light: #cfd0d1;
+  --clr-text-neutral-dark: #484949;
+
+  /* MOBILE Sizes */
+  --padding-sm: 1rem;
+  --header-height-sm: 4.2rem;
+
+  --padding: var(--padding-sm);
+  --header-height: var(--header-height-sm);
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(0 0 0 / 0.2);
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background-color: var(--clr-app-background);
+}

@@ -1,0 +1,77 @@
+.sticky {
+  position: fixed;
+  top: 0;
+}
+
+button.light,
+button.light.negative:hover,
+button.dark.negative,
+button.dark.bordered:hover {
+  color: var(--clr-text-light);
+}
+
+button.light.negative,
+button.light.bordered:hover,
+button.dark,
+button.dark.negative:hover {
+  color: var(--clr-primary-element);
+}
+
+button.light.bordered,
+button.light.negative,
+button.light.negative:hover {
+  border: 2px solid var(--clr-text-light);
+}
+
+button.light.negative,
+button.light.bordered:hover,
+button.dark.negative:hover {
+  background-color: var(--clr-text-light);
+}
+
+button.dark.bordered,
+button.dark.negative,
+button.dark.negative:hover {
+  border: 2px solid var(--clr-primary-element);
+}
+
+button.light.negative:hover,
+button.dark.negative,
+button.dark.bordered:hover {
+  background-color: var(--clr-primary-element);
+}
+
+button.dark.negative:hover {
+  background-color: transparent;
+}
+
+button.pictogram {
+  border-radius: 15%;
+}
+
+button.pictogram.sm {
+  width: 2.25rem;
+  aspect-ratio: 1;
+}
+
+button.hybrid {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+button.hybrid.sm {
+  height: 2.25rem;
+  padding: 0 1rem;
+  font-weight: 700;
+  border-radius: 0.4rem;
+}
+
+button.dark.delete-item {
+  color: var(--clr-accent-negative);
+  border: 2px solid var(--clr-accent-negative);
+}
+
+button.dark.delete-item:hover {
+  background-color: var(--clr-accent-negative);
+}
