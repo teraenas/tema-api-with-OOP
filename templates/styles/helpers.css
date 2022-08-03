@@ -3,46 +3,8 @@
   top: 0;
 }
 
-button.light,
-button.light.negative:hover,
-button.dark.negative,
-button.dark.bordered:hover {
-  color: var(--clr-text-light);
-}
-
-button.light.negative,
-button.light.bordered:hover,
-button.dark,
-button.dark.negative:hover {
-  color: var(--clr-primary-element);
-}
-
-button.light.bordered,
-button.light.negative,
-button.light.negative:hover {
-  border: 2px solid var(--clr-text-light);
-}
-
-button.light.negative,
-button.light.bordered:hover,
-button.dark.negative:hover {
-  background-color: var(--clr-text-light);
-}
-
-button.dark.bordered,
-button.dark.negative,
-button.dark.negative:hover {
-  border: 2px solid var(--clr-primary-element);
-}
-
-button.light.negative:hover,
-button.dark.negative,
-button.dark.bordered:hover {
-  background-color: var(--clr-primary-element);
-}
-
-button.dark.negative:hover {
-  background-color: transparent;
+.themed-container {
+  background-color: var(--clr-primary-theme);
 }
 
 button.pictogram {
@@ -67,11 +29,48 @@ button.hybrid.sm {
   border-radius: 0.4rem;
 }
 
-button.dark.delete-item {
-  color: var(--clr-accent-negative);
-  border: 2px solid var(--clr-accent-negative);
+button.light,
+button.dark.inverted {
+  color: var(--clr-text-light);
 }
 
-button.dark.delete-item:hover {
-  background-color: var(--clr-accent-negative);
+button.light.inverted {
+  background-color: var(--clr-text-light);
+}
+
+button.dark {
+  color: var(--clr-text-neutral-dark);
+}
+
+button.dark.inverted {
+  background-color: var(--clr-text-neutral-dark);
+}
+
+button.themed {
+  color: var(--clr-primary-theme);
+}
+
+button.themed.inverted {
+  color: var(--clr-text-light);
+  background-color: var(--clr-primary-theme);
+}
+
+:is(.themed-container) button.inverted {
+  color: var(--clr-primary-theme);
+}
+
+button:hover {
+  background-image: linear-gradient(rgba(0 0 0 / 0.25), rgba(0 0 0 / 0.25));
+}
+
+button:disabled {
+  color: var(--clr-disabled);
+}
+
+button.inverted:disabled {
+  background-color: var(--clr-disabled);
+}
+
+button:hover:disabled {
+  background-image: none;
 }

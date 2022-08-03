@@ -7,7 +7,7 @@
   --clr-footer: #ffffff;
   --clr-primary-background: #eeeeee;
   --clr-secondary-background: #ffffff;
-  --clr-primary-element: #0075f2;
+  --clr-primary-theme: #0075f2;
   --clr-accent-positive: #4ecdc4;
   --clr-accent-negative: #fc440f;
 
@@ -20,9 +20,19 @@
   --clr-text-neutral-light: #cfd0d1;
   --clr-text-neutral-dark: #484949;
 
+  --clr-disabled: #cfd0d1;
+
   /* MOBILE Sizes */
   --padding-sm: 1rem;
   --header-height-sm: 4.2rem;
+
+  /* TABLET Sizes */
+  --padding-md: 1.25rem;
+  --header-height-md: 4.4rem;
+
+  /* DESKTOP Sizes */
+  --padding-lg: 1.5rem;
+  --header-height-lg: 4.5rem;
 
   --padding: var(--padding-sm);
   --header-height: var(--header-height-sm);
@@ -46,10 +56,6 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: rgba(0 0 0 / 0.2);
 }
 
 a {

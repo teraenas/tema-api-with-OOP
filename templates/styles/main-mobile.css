@@ -19,7 +19,7 @@
 
 .dashboard-controls {
   display: flex;
-  gap: 1rem;
+  gap: 0.6rem;
 }
 
 /* Main CONTAINER */
@@ -50,13 +50,12 @@
 .progress-indicator {
   fill: none;
   stroke-width: 4px;
-  stroke: var(--clr-primary-element);
+  stroke: var(--clr-primary-theme);
 }
 
 /* __controls */
 #app-container__controls {
   padding: calc(1.33 * var(--padding)) var(--padding);
-  background-color: var(--clr-primary-element);
   border-top-left-radius: 0.4rem;
   border-top-right-radius: 0.4rem;
 }
@@ -73,16 +72,30 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: var(--padding);
-  color: var(--clr-text-neutral-dark);
+  color: var(--clr-text-dark);
   background-color: var(--clr-secondary-background);
   border-radius: 0.4rem;
+}
+
+.todo + .todo {
+  margin-top: var(--padding);
+}
+
+.todo-content {
+  flex: 50%;
 }
 
 .todo-text {
   font-size: 1.2rem;
   font-weight: 500;
+}
+
+.todo-controls {
+  flex: 1 0;
+  display: flex;
+  gap: 0.6rem;
 }
 
 [role='delete-button'] {

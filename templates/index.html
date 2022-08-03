@@ -13,6 +13,8 @@
     <script src="../views/TodoList.js"></script>
     <link rel="stylesheet" href="./styles/global.css">
     <link rel="stylesheet" href="./styles/main-mobile.css">
+    <link rel="stylesheet" href="./styles/main-tablet.css">
+    <link rel="stylesheet" href="./styles/main-desktop.css">
     <link rel="stylesheet" href="./styles/helpers.css">
     <title>wittd</title>
 </head>
@@ -22,12 +24,12 @@
         <div class="main-logo">wittd</div>
         <div class="dashboard-controls">
             <div id="account-controls">
-                <button id="account-controls__toggle" class="pictogram sm light">
+                <button id="account-controls__toggle" class="pictogram sm dark">
                     <i class="fa-solid fa-user"></i>
                 </button>
             </div>
             <div id="dashboard-menu">
-                <button id="dashboard-menu__toggle" class="pictogram sm light">
+                <button id="dashboard-menu__toggle" class="pictogram sm dark">
                     <i class="fa-solid fa-bars"></i>
                 </button>
             </div>
@@ -42,26 +44,29 @@
                 <h3>Completed from total</h3>
             </div>
         </div>
-        <div id="app-container__controls">
-            <button id="add-todo-dialog__toggle" class="hybrid sm light bordered">
-                <i class="fa-solid fa-pen-to-square"></i>Add a TODO
+        <div id="app-container__controls" class="themed-container">
+            <button id="add-todo-dialog__toggle" class="hybrid sm light">
+                <i class=" fa-solid fa-pen-to-square"></i>Add a TODO
             </button>
         </div>
         <div id="app-container__todo-list">
             <div class="todo">
                 <div class="todo-content">
-                    <p class="todo-text">This is the content of the TODO and it could even be longer!</p>
+                    <p class="todo-text">This is the content of the TODO and it could even be longer! Lorem ipsum dolor
+                        sit amet consectetur.</p>
                 </div>
-                <button class="hybrid sm dark bordered" role="complete-button">
-                    <i class="fa-solid fa-check"></i>
-                    <span class="complete">Complete</span>
-                </button>
-                <button class="pictogram sm dark" role="edit-button">
-                    <i class="fa-solid fa-pen"></i>
-                </button>
-                <button class="pictogram sm dark bordered delete-item" role="delete-button">
-                    <i class="fa-solid fa-trash-can"></i>
-                </button>
+                <div class="todo-controls">
+                    <button class="hybrid sm themed inverted" role="complete-button">
+                        <i class="fa-solid fa-check"></i>
+                        <span class="complete-status">Complete</span>
+                    </button>
+                    <button class="pictogram sm dark" role="edit-button">
+                        <i class="fa-solid fa-pen"></i>
+                    </button>
+                    <button class="pictogram sm dark" role="delete-button">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
