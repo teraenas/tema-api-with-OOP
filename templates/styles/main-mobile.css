@@ -119,6 +119,10 @@
   font-weight: 500;
 }
 
+:where([status='complete']) .todo-text {
+  color: var(--clr-disabled);
+}
+
 .todo-controls {
   flex: 1 0;
   display: flex;

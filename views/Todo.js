@@ -26,10 +26,12 @@ class TodoElement {
     }
     return element;
   }
-  constructor(id, content, isCompleted) {
-    this.id = id;
-    this.content = content;
-    this.isCompleted = isCompleted;
+
+  constructor(todo) {
+    this.localTodo = todo;
+    this.id = todo.id;
+    this.content = todo.content;
+    this.isCompleted = todo.isCompleted;
 
     this.todoText = this.#createNewElement({
       type: 'div',
@@ -64,6 +66,10 @@ class TodoElement {
       children: [this.completeIcon, this.completeStatus],
     });
 
+    this.markCompleteButton.addEventListener('click', () => {
+      this.markComplete();
+    });
+
     this.editIcon = this.#createNewElement({
       type: 'i',
       cls: 'fa-solid fa-pen',
@@ -81,10 +87,6 @@ class TodoElement {
 
     //   this.editButton.addEventListener('click', handleEditTodo);
 
-    //   this.markCompleteButton.addEventListener('click', () => {
-    //     markComplete(id);
-    //   });
-
     this.deleteIcon = this.#createNewElement({
       type: 'i',
       cls: 'fa-solid fa-trash-can',
@@ -97,10 +99,6 @@ class TodoElement {
       children: [this.deleteIcon],
     });
 
-    //   this.deleteButton.addEventListener('click', () => {
-    //     deleteTodo(id);
-    //   });
-
     this.todoControls = this.#createNewElement({
       type: 'div',
       cls: 'todo-controls',
@@ -109,12 +107,23 @@ class TodoElement {
 
     this.todo = this.#createNewElement({
       type: 'div',
-      id: `todo${this.id}`,
+      id: this.id,
       cls: 'todo',
       attr: [
         { name: 'status', value: this.isCompleted ? 'complete' : 'incomplete' },
       ],
       children: [this.todoContent, this.todoControls],
     });
+
+    todoListContainer.appendChild(this.todo);
+  }
+
+  async markComplete() {
+    const todo = await this.localTodo.markComplete();
+    this.isCompleted = todo.isCompleted;
+    this.todo.setAttribute('status', 'complete');
+    this.markCompleteButton.setAttribute('disabled', '');
+    this.completeStatus.innerHTML = 'Completed';
+    this.editButton.setAttribute('disabled', '');
   }
 }
