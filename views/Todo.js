@@ -39,10 +39,29 @@ class TodoElement {
       children: [this.content],
     });
 
+    this.cancelEditButton = this.#createNewElement({
+      type: 'button',
+      cls: 'hybrid sm themed inverted',
+      children: ['CANCEL'],
+    });
+
+    this.saveEditButton = this.#createNewElement({
+      type: 'button',
+      cls: 'hybrid sm themed inverted',
+      attr: [{ name: 'disabled', value: '' }],
+      children: ['SAVE'],
+    });
+
+    this.editControls = this.#createNewElement({
+      type: 'div',
+      cls: 'todo-edit-controls',
+      children: [this.cancelEditButton, this.saveEditButton],
+    });
+
     this.todoContent = this.#createNewElement({
       type: 'div',
       cls: 'todo-content',
-      children: [this.todoText],
+      children: [this.todoText, this.editControls],
     });
 
     this.completeIcon = this.#createNewElement({
@@ -66,10 +85,6 @@ class TodoElement {
       children: [this.completeIcon, this.completeStatus],
     });
 
-    this.markCompleteButton.addEventListener('click', () => {
-      this.markComplete();
-    });
-
     this.editIcon = this.#createNewElement({
       type: 'i',
       cls: 'fa-solid fa-pen',
@@ -84,8 +99,6 @@ class TodoElement {
       ],
       children: [this.editIcon],
     });
-
-    //   this.editButton.addEventListener('click', this.handleEditTodo);
 
     this.deleteIcon = this.#createNewElement({
       type: 'i',
@@ -115,15 +128,75 @@ class TodoElement {
       children: [this.todoContent, this.todoControls],
     });
 
+    this.editButton.addEventListener('click', () =>
+      this.toggleEditTodo(this.editButton)
+    );
+
+    this.cancelEditButton.addEventListener('click', () =>
+      this.toggleEditTodo(this.cancelEditButton)
+    );
+
+    this.saveEditButton.addEventListener('click', () => {
+      this.confirmEditTodo();
+    });
+
+    this.todoText.addEventListener('input', () => this.validateEditInput());
+
+    this.markCompleteButton.addEventListener('click', () =>
+      this.markComplete()
+    );
+
     todoListContainer.appendChild(this.todo);
   }
 
   async markComplete() {
-    const todo = await this.localTodo.markComplete();
-    this.isCompleted = todo.isCompleted;
+    await this.localTodo.markComplete();
+    this.updateTodoElement();
     this.todo.setAttribute('status', 'complete');
     this.markCompleteButton.setAttribute('disabled', '');
     this.completeStatus.innerHTML = 'Completed';
     this.editButton.setAttribute('disabled', '');
+    if (this.todoContent.hasAttribute('editing')) {
+      this.closeEditTodo();
+    }
+  }
+
+  toggleEditTodo(target) {
+    if (target === this.cancelEditButton) {
+      this.closeEditTodo();
+    } else {
+      this.todoContent.setAttribute('editing', '');
+      this.todoText.setAttribute('contenteditable', '');
+      this.todoText.focus();
+    }
+  }
+
+  closeEditTodo() {
+    this.todoContent.removeAttribute('editing');
+    this.todoText.removeAttribute('contenteditable');
+    this.saveEditButton.setAttribute('disabled', '');
+    this.todoText.innerText = this.localTodo.content;
+  }
+
+  async confirmEditTodo() {
+    await this.localTodo.edit(this.todoText.innerText.trim());
+    this.content = this.localTodo.content;
+    this.closeEditTodo();
+  }
+
+  validateEditInput() {
+    const pattern = new RegExp(`^\\s*${this.localTodo.content}\\s*$`);
+    if (!this.todoText.innerText.match(pattern)) {
+      this.saveEditButton.removeAttribute('disabled');
+    } else {
+      this.saveEditButton.setAttribute('disabled', '');
+    }
+  }
+
+  updateTodoElement() {
+    // to be removed when reworking props
+    this.content = this.localTodo.content;
+    this.todoText.innerText = this.localTodo.content;
+    this.isCompleted = this.localTodo.isCompleted;
   }
 }

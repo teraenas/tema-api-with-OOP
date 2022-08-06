@@ -119,8 +119,25 @@
   font-weight: 500;
 }
 
+:where([editing='']) .todo-text,
+.todo-text:focus {
+  outline: none;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--clr-primary-theme);
+}
+
 :where([status='complete']) .todo-text {
   color: var(--clr-disabled);
+}
+
+.todo-edit-controls {
+  display: none;
+}
+
+:where([editing='']) .todo-edit-controls {
+  display: flex;
+  gap: 0.6rem;
+  margin-block-start: 1rem;
 }
 
 .todo-controls {

@@ -32,16 +32,17 @@ class Todo {
     }
   }
 
-  async edit() {
+  async edit(content) {
     try {
       const response = await fetch(`${API_URL}${this.id.split('-')[1]}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          todo: this.content,
+          todo: content,
         }),
       });
       const todo = await response.json();
+      this.content = todo.todo;
       return this;
     } catch (error) {
       console.warn(`Error(${error.name}): ${error.message}`);
