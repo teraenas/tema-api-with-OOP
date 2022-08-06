@@ -85,7 +85,7 @@ class TodoElement {
       children: [this.editIcon],
     });
 
-    //   this.editButton.addEventListener('click', handleEditTodo);
+    //   this.editButton.addEventListener('click', this.handleEditTodo);
 
     this.deleteIcon = this.#createNewElement({
       type: 'i',

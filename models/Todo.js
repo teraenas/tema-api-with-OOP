@@ -42,7 +42,7 @@ class Todo {
         }),
       });
       const todo = await response.json();
-      return todo;
+      return this;
     } catch (error) {
       console.warn(`Error(${error.name}): ${error.message}`);
     }
