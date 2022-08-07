@@ -10,6 +10,8 @@
     <script src="../views/Todo.js"></script>
     <script src="../models/TodoList.js"></script>
     <script src="../views/TodoList.js"></script>
+    <script src="./scripts/loading-indicator.js" defer></script>
+    <script src="./scripts/progress.js" defer></script>
     <script src="./scripts/variables.js" defer></script>
     <script src="./scripts/main.js" defer></script>
     <link rel="stylesheet" href="./styles/global.css">
@@ -17,6 +19,7 @@
     <link rel="stylesheet" href="./styles/main-mobile.css">
     <link rel="stylesheet" href="./styles/main-tablet.css">
     <link rel="stylesheet" href="./styles/main-desktop.css">
+    <link rel="stylesheet" href="./styles/loading-indicator.css">
     <title>wittd</title>
 </head>
 
@@ -39,9 +42,12 @@
     <main id="app-container">
         <div id="app-container__header">
             <div id="general-progress">
-                <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
-                    <circle class="progress-indicator" cx="20" cy="20" r="18" />
-                </svg>
+                <div id="general-progress__indicator">
+                    <svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="progress-indicator" cx="20" cy="20" r="18" />
+                    </svg>
+                    <h3 id="general-progress__value">0%</h3>
+                </div>
                 <h3>Completed from total</h3>
             </div>
         </div>
@@ -57,28 +63,9 @@
                 <button id="add-todo-dialog__cancel" class="hybrid sm dark">Cancel</button>
             </div>
         </div>
-        <div id="app-container__todo-list">
-            <div class="todo">
-                <div class="todo-content">
-                    <p class="todo-text">This is the content of the TODO and it could even be longer! Lorem ipsum dolor
-                        sit amet consectetur.</p>
-                </div>
-                <div class="todo-controls">
-                    <button class="hybrid sm themed inverted" role="complete-button">
-                        <i class="fa-solid fa-check"></i>
-                        <span class="complete-status">Complete</span>
-                    </button>
-                    <button class="pictogram sm dark" role="edit-button">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <button class="pictogram sm dark" role="delete-button">
-                        <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+        <div id="app-container__todo-list"></div>
     </main>
-    <footer>
+    <footer id="app-footer">
         <div class="copyright">&copy by Mihai Dragan</div>
     </footer>
 </body>

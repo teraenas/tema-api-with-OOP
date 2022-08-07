@@ -3,4 +3,8 @@
     --padding: var(--padding-md);
     --header-height: var(--header-height-md);
   }
+
+  .todo-content {
+    width: 60%;
+  }
 }

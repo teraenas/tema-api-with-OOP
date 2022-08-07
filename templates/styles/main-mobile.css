@@ -1,5 +1,4 @@
 /* Main HEADER */
-
 #app-header {
   display: flex;
   justify-content: space-between;
@@ -19,21 +18,21 @@
 
 .dashboard-controls {
   display: flex;
-  gap: 0.6rem;
+  gap: var(--button-gap);
 }
 
 /* Main CONTAINER */
-/* __header */
 #app-container {
-  max-width: 80rem;
-  margin-inline: auto;
+  width: min(100%, 80rem);
   padding: 0 var(--padding);
+  margin-block-end: calc(var(--padding) * 2);
 }
 
 .sticky + #app-container {
   padding-top: var(--header-height);
 }
 
+/* __header */
 #app-container__header {
   color: var(--clr-text-neutral-dark);
   padding: calc(3 * var(--padding)) 0 calc(3 * var(--padding)) 0;
@@ -45,14 +44,43 @@
   align-items: center;
 }
 
-#general-progress svg {
-  width: 40px;
+#general-progress__indicator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--clr-disabled);
+  border-radius: 50%;
+}
+
+#general-progress__indicator::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+#general-progress__indicator svg {
+  width: 72px;
+  transform: rotate(-90deg);
 }
 
 .progress-indicator {
+  --value: 113;
   fill: none;
   stroke-width: 4px;
   stroke: var(--clr-primary-theme);
+  stroke-dasharray: 113;
+  stroke-dashoffset: var(--value);
+  transition: all 1250ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#general-progress__value {
+  position: absolute;
+  font-weight: 700;
+  z-index: 2;
 }
 
 /* __controls */
@@ -84,23 +112,33 @@
 
 #add-todo-dialog__controls {
   display: flex;
-  gap: 0.6rem;
+  gap: var(--button-gap);
 }
 
 /* __todo-list */
 #app-container__todo-list {
+  position: relative;
+  min-height: 8rem;
   padding: var(--padding);
   background-color: var(--clr-primary-background);
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
 }
 
+.no-todos-placeholder {
+  padding: 4rem 0;
+  text-align: center;
+  color: var(--clr-text-neutral-dark);
+}
+
 .todo {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   padding: var(--padding);
+  overflow: hidden;
   color: var(--clr-text-dark);
   background-color: var(--clr-secondary-background);
   border-radius: 0.4rem;
@@ -111,11 +149,12 @@
 }
 
 .todo-content {
-  flex: 50%;
+  width: 100%;
 }
 
 .todo-text {
-  font-size: 1.2rem;
+  overflow-wrap: break-word;
+  font-size: 1.125rem;
   font-weight: 500;
 }
 
@@ -136,14 +175,14 @@
 
 :where([editing='']) .todo-edit-controls {
   display: flex;
-  gap: 0.6rem;
+  gap: var(--button-gap);
   margin-block-start: 1rem;
 }
 
 .todo-controls {
   flex: 1 0;
   display: flex;
-  gap: 0.6rem;
+  gap: var(--button-gap);
 }
 
 [role='delete-button'] {
@@ -151,10 +190,10 @@
 }
 
 /* Main FOOTER */
-
-footer {
-  margin-top: var(--padding);
-  padding: 1rem var(--padding);
+#app-footer {
+  margin-block-start: auto;
+  width: 100%;
+  padding: 1.5rem var(--padding);
   font-weight: 500;
   color: var(--clr-text-neutral-dark);
   background-color: var(--clr-footer);

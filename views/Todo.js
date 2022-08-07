@@ -29,14 +29,11 @@ class TodoElement {
 
   constructor(todo) {
     this.localTodo = todo;
-    this.id = todo.id;
-    this.content = todo.content;
-    this.isCompleted = todo.isCompleted;
 
     this.todoText = this.#createNewElement({
       type: 'div',
       cls: 'todo-text',
-      children: [this.content],
+      children: [this.localTodo.content],
     });
 
     this.cancelEditButton = this.#createNewElement({
@@ -72,14 +69,16 @@ class TodoElement {
     this.completeStatus = this.#createNewElement({
       type: 'span',
       cls: 'complete-status',
-      children: [this.isCompleted ? 'Completed' : 'Complete'],
+      children: [this.localTodo.isCompleted ? 'Completed' : 'Complete'],
     });
 
     this.markCompleteButton = this.#createNewElement({
       type: 'button',
       cls: 'hybrid sm themed inverted',
       attr: [
-        ...(this.isCompleted ? [{ name: 'disabled', value: '' }] : []),
+        ...(this.localTodo.isCompleted
+          ? [{ name: 'disabled', value: '' }]
+          : []),
         { name: 'role', value: 'complete-button' },
       ],
       children: [this.completeIcon, this.completeStatus],
@@ -94,7 +93,9 @@ class TodoElement {
       type: 'button',
       cls: 'pictogram sm dark',
       attr: [
-        ...(this.isCompleted ? [{ name: 'disabled', value: '' }] : []),
+        ...(this.localTodo.isCompleted
+          ? [{ name: 'disabled', value: '' }]
+          : []),
         { name: 'role', value: 'edit-button' },
       ],
       children: [this.editIcon],
@@ -123,7 +124,10 @@ class TodoElement {
       id: this.id,
       cls: 'todo',
       attr: [
-        { name: 'status', value: this.isCompleted ? 'complete' : 'incomplete' },
+        {
+          name: 'status',
+          value: this.localTodo.isCompleted ? 'complete' : 'incomplete',
+        },
       ],
       children: [this.todoContent, this.todoControls],
     });
@@ -150,8 +154,10 @@ class TodoElement {
   }
 
   async markComplete() {
+    this.todo.appendChild(loadingIndicator());
     await this.localTodo.markComplete();
-    this.updateTodoElement();
+    this.todo.removeChild(this.todo.lastChild);
+
     this.todo.setAttribute('status', 'complete');
     this.markCompleteButton.setAttribute('disabled', '');
     this.completeStatus.innerHTML = 'Completed';
@@ -159,6 +165,7 @@ class TodoElement {
     if (this.todoContent.hasAttribute('editing')) {
       this.closeEditTodo();
     }
+    updateGeneralProgress();
   }
 
   toggleEditTodo(target) {
@@ -179,8 +186,10 @@ class TodoElement {
   }
 
   async confirmEditTodo() {
+    this.todo.appendChild(loadingIndicator());
     await this.localTodo.edit(this.todoText.innerText.trim());
-    this.content = this.localTodo.content;
+    this.todo.removeChild(this.todo.lastChild);
+
     this.closeEditTodo();
   }
 
@@ -191,12 +200,5 @@ class TodoElement {
     } else {
       this.saveEditButton.setAttribute('disabled', '');
     }
-  }
-
-  updateTodoElement() {
-    // to be removed when reworking props
-    this.content = this.localTodo.content;
-    this.todoText.innerText = this.localTodo.content;
-    this.isCompleted = this.localTodo.isCompleted;
   }
 }

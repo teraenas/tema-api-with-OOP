@@ -1,5 +1,3 @@
-const todoList = new LocalTodoList();
-
 const toggleAddTodoDialog = function (e) {
   if (e.target === addTodoDialogCancel) {
     addTodoInput.value = '';
